@@ -1,7 +1,8 @@
 """
+File that generates SQLi payloads.
+
 Author: Aleksa Zatezalo
 Date: January 2025
-Description: File that generates SQLi payloads
 """
 
 class PostgresPayloadGenerator:
