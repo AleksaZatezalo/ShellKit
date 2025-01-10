@@ -51,8 +51,6 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Install development dependencies (optional)
-pip install -r requirements-dev.txt
 ```
 
 ## 🎮 Quick Start
@@ -134,9 +132,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## 📞 Contact & Support
 
-- Submit bug reports and feature requests via [GitHub Issues](https://github.com/yourusername/shellkit/issues)
-- Join our [Discord Community](https://discord.gg/shellkit)
-- Follow updates on [Twitter](https://twitter.com/shellkit)
+- Submit bug reports and feature requests via [GitHub Issues](https://github.com/AleksaZatezalo/shellkit/issues)
+- Follow updates on [Twitter](https://twitter.com/ZatezaloAleksa)
 
 ## ⚠️ Disclaimer
 
