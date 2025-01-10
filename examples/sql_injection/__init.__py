@@ -1,0 +1,13 @@
+"""
+ShellKit SQL Injection Examples
+
+This module contains examples of SQL injection exploits for various applications.
+Each example demonstrates how to use ShellKit's SQL injection capabilities in real-world scenarios.
+
+Author: Aleksa Zatezalo
+Date: January 2025
+"""
+
+from .managedEngine import ManageEngineExploit
+
+__all__ = ['ManageEngineExploit']
