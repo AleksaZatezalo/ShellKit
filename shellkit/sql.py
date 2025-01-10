@@ -80,6 +80,43 @@ def setPath(value):
     global FILEPATH
     FILEPATH = value
 
+# Getters
+def getSleep():
+    """
+    Gets the global sleep duration value.
+
+    Returns:
+        int: The current sleep duration value.
+    """
+    return SLEEP
+
+def getContent():
+    """
+    Gets the global file content value.
+
+    Returns:
+        str: The current file content string.
+    """
+    return FILECONTENT
+
+def getName():
+    """
+    Gets the global filename value.
+
+    Returns:
+        str: The current filename string.
+    """
+    return FILENAME
+
+def getPath():
+    """
+    Gets the global filepath value.
+
+    Returns:
+        str: The current filepath string.
+    """
+    return FILEPATH
+
 # Blind SQL functions
 def checkRequestTime(url, string, max_time, proxy=None):
     """
