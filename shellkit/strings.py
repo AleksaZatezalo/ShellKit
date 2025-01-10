@@ -8,6 +8,8 @@ Description: A set of string manipulation functions. Includes methods for removi
             replacing carriage returns, replacing double colons, and base64 encoding input strings.
 """
 
+import base64
+
 def removeTabs(input_string):
     """
     Takes a string, input_string, and removes all the tabs from the string.
