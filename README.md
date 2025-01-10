@@ -1,34 +1,152 @@
-# Shell Kit
+# 🛡️ ShellKit
 
-ShellKit is an open-source, Python-based framework designed specifically for rapid development, testing, and automation of web application exploits. Built with the needs of security researchers, penetration testers, and CTF enthusiasts in mind, ShellKit provides a powerful set of tools focused on exploiting common web vulnerabilities like SQL injection, XSS, RCE (Remote Code Execution), file inclusion, and command injection. With ShellKit, you can easily craft and test exploits, interact with vulnerable web services, automate attack vectors, and deploy payloads across a wide range of web application vulnerabilities. repository containing the exploits the AWAE course (OSWE by Offsec) helps security engineers learn.
+<div align="center">
 
-### Key Features
+[![Python Version](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-* **HTTP Request & Response Handling:** Send custom HTTP requests (GET, POST) and parse responses, including headers, cookies, and body data.
-* **Automated Exploits:** Easily automate web vulnerability exploitation, fuzz input fields, and test for issues like SQLi, XSS, and RCE.
-* **Web Shells & Reverse Shells:** Generate reverse shell payloads and interact with web shells for remote code execution, giving you complete control over the target system.
-* **Fuzzing Tools:** Send multiple payloads to web endpoints with minimal setup and get immediate feedback on successful exploits.
-* **Cross-Platform Payloads:** Generate platform-specific shellcode and reverse shells, allowing exploitation across various environments.
-* **Payload Chaining:**s Combine exploits to create more sophisticated attack chains, bypassing multiple layers of security protections.
+</div>
 
-## Why Shellkit
+ShellKit is an open-source, Python-based framework designed specifically for rapid development, testing, and automation of web application exploits. Built with the needs of security researchers, penetration testers, and CTF enthusiasts in mind, ShellKit provides a powerful set of tools focused on exploiting common web vulnerabilities like SQL injection, XSS, RCE (Remote Code Execution), file inclusion, and command injection.
 
-ShellKit was created by hackers for hackers. Its goal is to make exploit development and web application exploitation as seamless and efficient as possible. Whether you're cracking open a vulnerable web app in a CTF competition, automating penetration testing tasks, or diving into web security research, ShellKit is your ultimate tool for fast, effective exploitation. Ready to break into those web apps? ShellKit is here to make your exploits as efficient as possible!
+## 🚀 Features
 
-## Contribution Guidelines
+### Core Capabilities
+* **Vulnerability Testing & Exploitation**
+  - SQL Injection (Error-based, Boolean-based, Time-based)
+  - Cross-Site Scripting (XSS)
+  - Server-Side Template Injection (SSTI)
+  - Insecure Deserialization
+  - Server-Side Request Forgery (SSRF)
+  - Command Injection
+  - Prototype Pollution
+  - WAF Bypass Techniques
 
-When contributing to this repository, please first discuss the change you wish to make via issue here on GitHub. Make sure all pull requests are tagged with a specific ticket number found in the repositories issues section.Before making any changes please create your own branch. Follow all three points below before opening a PR:
+### Advanced Tools
+* **Shell Generation & Management**
+  - Reverse Shell Generator (Multi-language support)
+  - Web Shell Templates
+  - Bind Shell Creator
+  - Custom Shell Encoding
 
-1. Any changes you want to create must be tagged to an issue opened on this repo. If an issue you've found does not yet exit, please open it.
-2. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
-3. Make sure all corresponding test cases pass.
-4. Update the README.md with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations and container parameters.
+* **Payload Engineering**
+  - Advanced Encoding/Decoding
+  - HTTP Request Manipulation
+  - Character Set Handlers
+  - WAF Evasion Techniques
 
-Note that we have a code of conduct. Follow it in all your interactions with the project.
+## 🔧 Installation
 
-## Known Issues
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/shellkit.git
+cd shellkit
 
-A list of known issues and features that are currently being addressed are maintained on the github issues tab. Please look at the list of known issues before raising a new issue.
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install development dependencies (optional)
+pip install -r requirements-dev.txt
+```
+
+## 🎮 Quick Start
+
+```python
+from shellkit.sql_injection import SQLInjector
+from shellkit.shells import ReverseShellGenerator
+from shellkit.encoders import Base64ShellEncoder
+
+# SQL Injection Example
+injector = SQLInjector()
+result = injector.test_injection(
+    url="http://target.com/vulnerable.php",
+    parameter="id",
+    technique="boolean"
+)
+
+# Generate an Encoded Reverse Shell
+generator = ReverseShellGenerator()
+encoder = Base64ShellEncoder()
+
+shell = generator.generate(
+    language="python",
+    ip="10.10.10.10",
+    port=4444
+)
+
+encoded_shell = encoder.encode(shell)
+```
+
+## 📚 Documentation
+
+Detailed documentation is available at [docs/](docs/):
+
+- [Getting Started Guide](docs/getting-started.md)
+- [Module Reference](docs/modules/)
+- [API Documentation](docs/api/)
+- [Examples & Tutorials](docs/examples/)
+
+## 🔬 Supported Vulnerabilities
+
+| Vulnerability Type | Status | Description |
+|-------------------|---------|-------------|
+| SQL Injection | ✅ | Error, Boolean, Time-based methods |
+| XSS | ✅ | Reflected, Stored, DOM-based |
+| SSTI | ✅ | Multiple template engine support |
+| Deserialization | ✅ | Python, PHP, Java formats |
+| SSRF | ✅ | Internal/External resource access |
+| Command Injection | ✅ | OS command execution |
+| Prototype Pollution | ✅ | JavaScript object manipulation |
+| WAF Bypass | ✅ | Various evasion techniques |
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details. Key points:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🔒 Security
+
+- All exploits are designed for authorized testing only
+- Review target scope and permissions before testing
+- Follow responsible disclosure practices
+- Report security issues via our [Security Policy](SECURITY.md)
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## 🙏 Acknowledgments
+
+- Contributors & community members
+- Open source security tools that inspired this project
+- Security researchers who share their knowledge
+
+## 📞 Contact & Support
+
+- Submit bug reports and feature requests via [GitHub Issues](https://github.com/yourusername/shellkit/issues)
+- Join our [Discord Community](https://discord.gg/shellkit)
+- Follow updates on [Twitter](https://twitter.com/shellkit)
+
+## ⚠️ Disclaimer
+
+ShellKit is intended for legal security testing only. Users are responsible for obtaining proper authorization before testing any systems. The developers assume no liability for misuse or damage caused by this tool.
+
+---
+
+<div align="center">
+Made with ❤️ by the Security Research Community
+</div>
 
 ## Donation Link
 
