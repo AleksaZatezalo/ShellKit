@@ -83,12 +83,7 @@ encoded_shell = encoder.encode(shell)
 
 ## 📚 Documentation
 
-Detailed documentation is available at [docs/](docs/):
-
-- [Getting Started Guide](docs/getting-started.md)
-- [Module Reference](docs/modules/)
-- [API Documentation](docs/api/)
-- [Examples & Tutorials](docs/examples/)
+Detailed documentation is available at [docs/](docs/).
 
 ## 🔬 Supported Vulnerabilities
 
@@ -105,7 +100,7 @@ Detailed documentation is available at [docs/](docs/):
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details. Key points:
+We welcome contributions! Please see our Contributing Guidelines for details. Key points:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
@@ -118,11 +113,6 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 - All exploits are designed for authorized testing only
 - Review target scope and permissions before testing
 - Follow responsible disclosure practices
-- Report security issues via our [Security Policy](SECURITY.md)
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## 🙏 Acknowledgments
 
@@ -133,7 +123,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## 📞 Contact & Support
 
 - Submit bug reports and feature requests via [GitHub Issues](https://github.com/AleksaZatezalo/shellkit/issues)
-- Follow updates on [Twitter](https://twitter.com/ZatezaloAleksa)
+- Follow the project creator for updates on [Twitter](https://twitter.com/ZatezaloAleksa)
 
 ## ⚠️ Disclaimer
 
