@@ -25,13 +25,13 @@ class PostgresHTTPEncoder(BaseEncoder):
             str: Encoded payload ready for HTTP transmission
         """
         # Replace quotes with $$
-        data = data.replace("'", "$$")
+        data = data.replace('"', "$$")
         
         # Replace spaces with +
         data = data.replace(" ", "+")
         
         # URL encode remaining special characters, preserving + and $
-        return urllib.parse.quote(data, safe='+$')
+        return urllib.parse.quote(data, safe="+$()+_;=,'")
 
     def decode(self, data: str) -> str:
         """
