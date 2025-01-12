@@ -106,8 +106,3 @@ ShellKit is intended for legal security testing only. Users are responsible for 
 <div align="center">
 Made with ❤️ by the Security Research Community
 </div>
-
-## Donation Link
-
-If you have benefited from this project and use Monero please consider donanting to the following address:
-47RoH3K4j8STLSh8ZQ2vUXZdh7GTK6dBy7uEBopegzkp6kK4fBrznkKjE3doTamn3W7A5DHbWXNdjaz2nbZmSmAk8X19ezQ
