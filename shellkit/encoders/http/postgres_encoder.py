@@ -1,5 +1,5 @@
 """
-PostgreSQL specific HTTP encoder.
+PostgreSQL specific HTTP encoder. To be used for SQL injection attacks.
 
 Author: Aleksa Zatezalo
 Date: January 2025
