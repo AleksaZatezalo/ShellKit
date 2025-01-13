@@ -7,4 +7,4 @@ Date: January 2025
 
 from .base import BaseEncoder
 
-__all__ = ['BaseEncoder']
+__all__ = ["BaseEncoder"]

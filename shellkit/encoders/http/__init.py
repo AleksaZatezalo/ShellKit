@@ -13,10 +13,4 @@ from .base64_encoder import Base64Encoder
 from .utf_encoder import UTFEncoder
 from .double_encoder import DoubleEncoder
 
-__all__ = [
-    'BaseEncoder',
-    'URLEncoder',
-    'Base64Encoder',
-    'UTFEncoder',
-    'DoubleEncoder'
-]
+__all__ = ["BaseEncoder", "URLEncoder", "Base64Encoder", "UTFEncoder", "DoubleEncoder"]

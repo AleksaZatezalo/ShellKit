@@ -8,16 +8,17 @@ Date: January 2025
 from .base import BaseEncoder
 import base64
 
+
 class Base64Encoder(BaseEncoder):
     """Encoder for Base64 encoding payloads"""
-    
+
     def encode(self, data: str) -> str:
         """
         Base64 encode a string.
-        
+
         Args:
             data (str): Data to encode
-            
+
         Returns:
             str: Base64 encoded string
         """
@@ -26,10 +27,10 @@ class Base64Encoder(BaseEncoder):
     def decode(self, data: str) -> str:
         """
         Decode a Base64 encoded string.
-        
+
         Args:
             data (str): Base64 encoded data to decode
-            
+
         Returns:
             str: Decoded string
         """

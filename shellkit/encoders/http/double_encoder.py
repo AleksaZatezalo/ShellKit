@@ -8,17 +8,18 @@ Date: January 2025
 from .base import BaseEncoder
 import urllib.parse
 
+
 class DoubleEncoder(BaseEncoder):
     """Encoder for double-encoding payloads"""
-    
-    def encode(self, data: str, safe: str = '') -> str:
+
+    def encode(self, data: str, safe: str = "") -> str:
         """
         Double URL encode a string.
-        
+
         Args:
             data (str): Data to encode
             safe (str): Characters to leave unencoded
-            
+
         Returns:
             str: Double URL encoded string
         """
@@ -30,10 +31,10 @@ class DoubleEncoder(BaseEncoder):
     def decode(self, data: str) -> str:
         """
         Decode a double URL encoded string.
-        
+
         Args:
             data (str): Double encoded data to decode
-            
+
         Returns:
             str: Decoded string
         """
@@ -45,10 +46,10 @@ class DoubleEncoder(BaseEncoder):
     def encode_char(self, char: str) -> str:
         """
         Double encode a single character.
-        
+
         Args:
             char (str): Single character to encode
-            
+
         Returns:
             str: Double encoded character
         """

@@ -11,15 +11,12 @@ Date: January 2025
 from .exploiter import PostgresExploiter
 from .payloads import PostgresPayloadGenerator
 
-__version__ = '0.1.0'
-__author__ = 'Aleksa Zatezalo'
-__email__ = 'zabumaphu@gmail.com'
+__version__ = "0.1.0"
+__author__ = "Aleksa Zatezalo"
+__email__ = "zabumaphu@gmail.com"
 
 # Define public interface
-__all__ = [
-    'PostgresExploiter',
-    'PostgresPayloadGenerator'
-]
+__all__ = ["PostgresExploiter", "PostgresPayloadGenerator"]
 
 # Version information tuple
 VERSION = (0, 1, 0)
