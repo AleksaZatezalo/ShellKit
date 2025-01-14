@@ -1,4 +1,3 @@
-```markdown
 # Contributing to ShellKit
 
 ## Testing Your Changes
