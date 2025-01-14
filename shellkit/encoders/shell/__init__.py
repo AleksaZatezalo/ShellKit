@@ -9,8 +9,4 @@ from .cmd_encoder import CommandEncoder
 from .powershell_encoder import PowerShellEncoder
 from .bash_encoder import BashEncoder
 
-__all__ = [
-    'CommandEncoder',
-    'PowerShellEncoder',
-    'BashEncoder'
-]
+__all__ = ["CommandEncoder", "PowerShellEncoder", "BashEncoder"]

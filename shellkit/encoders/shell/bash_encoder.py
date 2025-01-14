@@ -8,70 +8,71 @@ Date: January 2025
 from ..base import BaseEncoder
 import base64
 
+
 class BashEncoder(BaseEncoder):
     """Encoder for Bash commands"""
-    
+
     def __init__(self):
         self.special_chars = {
-            ' ': '\\ ',
+            " ": "\\ ",
             '"': '\\"',
             "'": "\\'",
-            '|': '\\|',
-            '&': '\\&',
-            ';': '\\;',
-            '(': '\\(',
-            ')': '\\)',
-            '<': '\\<',
-            '>': '\\>',
-            '$': '\\$',
-            '`': '\\`',
-            '!': '\\!',
-            '*': '\\*',
-            '?': '\\?',
-            '[': '\\[',
-            ']': '\\]',
-            '#': '\\#',
-            '~': '\\~',
-            '=': '\\=',
-            '%': '\\%'
+            "|": "\\|",
+            "&": "\\&",
+            ";": "\\;",
+            "(": "\\(",
+            ")": "\\)",
+            "<": "\\<",
+            ">": "\\>",
+            "$": "\\$",
+            "`": "\\`",
+            "!": "\\!",
+            "*": "\\*",
+            "?": "\\?",
+            "[": "\\[",
+            "]": "\\]",
+            "#": "\\#",
+            "~": "\\~",
+            "=": "\\=",
+            "%": "\\%",
         }
 
-    def encode(self, data: str, method: str = 'escape') -> str:
+    def encode(self, data: str, method: str = "escape") -> str:
         """
         Encode Bash command.
-        
+
         Args:
             data (str): Command to encode
             method (str): Encoding method ('escape', 'base64', 'hex')
-            
+
         Returns:
             str: Encoded command
         """
-        if method == 'escape':
+        if method == "escape":
             return self._escape_chars(data)
-        elif method == 'base64':
+        elif method == "base64":
             return self._base64_encode(data)
-        elif method == 'hex':
+        elif method == "hex":
             return self._hex_encode(data)
         else:
             raise ValueError(f"Unsupported encoding method: {method}")
 
-    def decode(self, data: str, method: str = 'escape') -> str:
+    def decode(self, data: str, method: str = "escape") -> str:
         """
         Decode Bash command.
-        
+
         Args:
             data (str): Encoded command
             method (str): Encoding method used
-            
+
         Returns:
             str: Original command
         """
-        if method == 'escape':
+        if method == "escape":
             return self._unescape_chars(data)
-        elif method == 'base64':
+        elif method == "base64":
             return self._base64_decode(data)
-        elif method == 'hex':
+        elif method == "hex":
             return self._hex_decode(data)
         else:
             raise ValueError(f"Unsupported encoding method: {method}")
@@ -104,7 +105,7 @@ class BashEncoder(BaseEncoder):
 
     def _hex_encode(self, data: str) -> str:
         """Hex encode Bash command"""
-        hex_str = ''.join([hex(ord(c))[2:] for c in data])
+        hex_str = "".join([hex(ord(c))[2:] for c in data])
         return f"echo {hex_str} | xxd -p -r | bash"
 
     def _hex_decode(self, data: str) -> str:

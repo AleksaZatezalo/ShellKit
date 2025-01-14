@@ -9,8 +9,4 @@ from .char_encoder import CharEncoder
 from .whitespace_encoder import WhitespaceEncoder
 from .special_chars_encoder import SpecialCharsEncoder
 
-__all__ = [
-    'CharEncoder',
-    'WhitespaceEncoder',
-    'SpecialCharsEncoder'
-]
+__all__ = ["CharEncoder", "WhitespaceEncoder", "SpecialCharsEncoder"]
