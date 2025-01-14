@@ -1,4 +1,3 @@
-```markdown
 # Shell Command Encoding Guide
 
 ## Overview
