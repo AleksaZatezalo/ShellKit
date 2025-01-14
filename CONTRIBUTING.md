@@ -1,20 +1,150 @@
-# Contributing
+```markdown
+# Contributing to ShellKit
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
+## Testing Your Changes
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+### Test Bench Overview
+ShellKit includes a comprehensive test bench for validating encoders and ensuring compatibility across different scenarios. The test bench is located in the `tests/` directory.
 
-## Pull Request Process
+### Setting Up the Test Environment
+1. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
-   build.
-2. Update the README.md with details of changes to the interface, this includes new environment 
-   variables, exposed ports, useful file locations and container parameters.
-3. Increase the version numbers in any examples files and the README.md to the new version that this
-   Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
-   do not have permission to do that, you may request the second reviewer to merge it for you.
+2. Install test requirements:
+```bash
+pip install -r requirements-dev.txt
+```
+
+### Running the Test Bench
+
+#### Full Test Suite
+Run all tests:
+```bash
+python -m pytest tests/
+```
+
+#### Testing Specific Encoders
+Test individual encoder modules:
+```bash
+# Test URL encoder
+python -m pytest tests/test_encoders/test_url_encoder.py
+
+# Test PostgreSQL encoder
+python -m pytest tests/test_encoders/test_postgres_encoder.py
+```
+
+#### Testing with Verbose Output
+For detailed test information:
+```bash
+python -m pytest -v tests/
+```
+
+### Adding New Tests
+
+1. For new encoders, create a test file in `tests/test_encoders/`:
+```python
+# tests/test_encoders/test_new_encoder.py
+import pytest
+from shellkit.encoders import NewEncoder
+
+def test_new_encoder_basic():
+    encoder = NewEncoder()
+    assert encoder.encode("test") == "expected_result"
+```
+
+2. For new vulnerability modules, create a test file in appropriate directory:
+```python
+# tests/test_sql_injection/test_new_feature.py
+import pytest
+from shellkit.sql_injection import NewFeature
+
+def test_new_feature():
+    feature = NewFeature()
+    assert feature.run() == expected_result
+```
+
+### Test Guidelines
+1. Each new feature must include tests
+2. Tests should cover:
+   - Basic functionality
+   - Edge cases
+   - Error conditions
+   - Input validation
+   - Special character handling
+
+### Running Test Coverage
+To check test coverage:
+```bash
+python -m pytest --cov=shellkit tests/
+
+# For detailed coverage report
+python -m pytest --cov=shellkit --cov-report=html tests/
+```
+
+### Continuous Integration
+Tests are automatically run on:
+- Pull request creation
+- Push to main branch
+- Daily scheduled runs
+
+### Common Test Scenarios
+Ensure your changes pass these common test scenarios:
+1. Input validation tests
+2. Character encoding tests
+3. Edge case handling
+4. Error condition tests
+5. Integration tests
+
+### Test Bench Structure
+```
+tests/
+├── __init__.py
+├── conftest.py
+├── test_encoders/
+│   ├── __init__.py
+│   ├── test_url_encoder.py
+│   ├── test_postgres_encoder.py
+│   └── test_base64_encoder.py
+├── test_sql_injection/
+│   ├── __init__.py
+│   └── test_exploiter.py
+└── test_utils/
+    ├── __init__.py
+    └── test_helpers.py
+```
+
+### Before Submitting Changes
+1. Run the full test suite
+2. Check test coverage
+3. Add tests for new features
+4. Update test documentation
+5. Verify all CI checks pass
+
+### Debug Tests
+To run tests with debug information:
+```bash
+python -m pytest -v --pdb tests/
+```
+
+### Test Requirements
+Ensure all test dependencies are listed in `requirements-dev.txt`:
+```
+pytest==8.0.0
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+coverage==7.4.1
+```
+
+### Best Practices
+1. Write clear test names
+2. Use descriptive assertions
+3. Group related tests
+4. Mock external dependencies
+5. Keep tests independent
+
 
 ## Code of Conduct
 
