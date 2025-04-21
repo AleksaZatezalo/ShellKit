@@ -1,5 +1,7 @@
 # 🛡️ ShellKit
 
+**Note:** This project has been archived. Do it it's massive scale and limited utility no further development will be done on this project.
+
 <div align="center">
 
 [![Python Version](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
